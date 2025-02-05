@@ -40,3 +40,12 @@
 .read-the-docs {
   color: #888;
 }
+/* Kjo mund të shtohet në App.css ose ku është stili i përmbajtjes */
+.container {
+  display: flex;
+  justify-content: center; /* Vendos përmbajtjen në qendër horizontalisht */
+  align-items: center; /* Vendos përmbajtjen në qendër vertikalisht */
+  height: 100vh; /* Përdorim të gjithë lartësinë e ekranit */
+  width: 100%; /* Përdorim të gjithë gjerësinë */
+  background-color: #f5f5f5; /* Mund të shtosh ngjyrë sfondi për një pamje më të pastër */
+}
