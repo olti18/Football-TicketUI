@@ -6,7 +6,7 @@ import InputField from "../components/InputField";
 import Button from "../components/Button";
 import ToggleButton from "../components/ToggleButton";
 
-const AuthForm = () => {
+const AuthForm = ({ onLogin }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -41,6 +41,7 @@ const AuthForm = () => {
       setMessage("Login successful!");
       setIsSuccess(true);
       Cookies.set("token", response.data.access_token, { expires: 7 });
+      onLogin(); // Call the onLogin prop to update the authentication status
     } catch (error) {
       setMessage(error.response?.data?.error || "Login failed!");
       setIsSuccess(false);
