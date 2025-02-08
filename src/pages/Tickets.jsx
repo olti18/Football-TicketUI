@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
-import "./Tickets.css"; // You'll need to create this file
+import "./Tickets.css";
 
 const Tickets = () => {
   const [tickets, setTickets] = useState([]);
@@ -40,14 +40,35 @@ const Tickets = () => {
     <div className="tickets-container">
       <h1>Available Tickets</h1>
       {tickets.length > 0 ? (
-        <div className="tickets-grid">
+        <div className="tickets-list">
           {tickets.map((ticket) => (
-            <div key={ticket.id} className="ticket-card">
-              <h3>Ticket ID: {ticket.id}</h3>
-              <p>Match ID: {ticket.matchId}</p>
-              <p>Section: {ticket.seatingSectionId}</p>
-              <p>Price: ${ticket.price}</p>
-              <button className="buy-button">Purchase Ticket</button>
+            <div key={ticket.id} className="ticket-item">
+              <div className="ticket-header">
+                <h3>{ticket.matchName}</h3>
+              </div>
+              <div className="ticket-details">
+                <p>
+                  <span>Ticket Number:</span> {ticket.seatNumber}
+                </p>
+                <p>
+                  <span>Price:</span> ${ticket.price}
+                </p>
+                <p>
+                  <span>Status:</span> {ticket.paid ? "Paid" : "Available"}
+                </p>
+                {ticket.purchaseDate && (
+                  <p>
+                    <span>Purchase Date:</span>{" "}
+                    {new Date(ticket.purchaseDate).toLocaleDateString()}
+                  </p>
+                )}
+              </div>
+              <button
+                className={`buy-button ${ticket.paid ? "disabled" : ""}`}
+                disabled={ticket.paid}
+              >
+                {ticket.paid ? "Sold" : "Purchase Ticket"}
+              </button>
             </div>
           ))}
         </div>
