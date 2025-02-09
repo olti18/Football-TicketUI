@@ -1,143 +1,395 @@
+.page-container {
+  display: flex;
+  gap: 30px;
+  padding: 20px;
+}
+
 .tickets-container {
-  padding: 40px;
-  max-width: 900px;
-  margin: 0 auto;
+  padding: 30px;
+  max-width: 800px; /* Reduced from 900px */
+  margin: 0;  /* Changed from margin: 0 auto */
+  background: linear-gradient(to bottom, #f8f9fa, #ffffff);
+  border-radius: 15px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.05);
+  flex: 2;
+}
+
+/* Add margin to the left side */
+.tickets-container {
+  margin-left: 20px;
 }
 
 .tickets-container h1 {
   color: #2c3e50;
-  font-size: 2.5em;
-  margin-bottom: 30px;
+  font-size: 2.2em; /* Reduced from 2.8em */
+  margin-bottom: 30px; /* Reduced from 40px */
   border-bottom: 3px solid #3498db;
-  padding-bottom: 10px;
+  padding-bottom: 10px; /* Reduced from 15px */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.tickets-container h1::after {
+  content: "";
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 100px;
+  height: 3px;
+  background: linear-gradient(to right, #3498db, #2ecc71);
 }
 
 .tickets-list {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 15px; /* Reduced from 25px */
 }
 
 .ticket-item {
   background: white;
-  border-left: 5px solid #3498db;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  padding: 20px;
+  border-left: 4px solid #3498db; /* Reduced from 5px */
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  padding: 15px 20px; /* Reduced from 25px */
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.ticket-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -5px;
+  height: 100%;
+  width: 5px;
+  background: linear-gradient(to bottom, #3498db, #2ecc71);
   transition: all 0.3s ease;
 }
 
 .ticket-item:hover {
-  transform: translateX(10px);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  transform: translateX(10px) translateY(-2px);
+  box-shadow: 0 8px 20px rgba(52, 152, 219, 0.2);
+}
+
+.ticket-item:hover::before {
+  transform: scaleY(1.1);
 }
 
 .ticket-header h3 {
   color: #2c3e50;
-  font-size: 1.4rem;
-  margin: 0 0 15px 0;
+  font-size: 1.3rem; /* Reduced from 1.6rem */
+  margin: 0 0 12px 0; /* Reduced from 0 0 20px 0 */
   display: flex;
   align-items: center;
+  font-weight: 600;
+  letter-spacing: 0.5px;
 }
 
 .ticket-header h3::before {
-  content: '🎟️';
-  margin-right: 10px;
+  content: "🎟️";
+  margin-right: 8px; /* Reduced from 12px */
+  font-size: 1.4rem; /* Reduced from 1.8rem */
+  animation: ticketBounce 2s infinite;
+}
+
+@keyframes ticketBounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
 }
 
 .ticket-details {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 15px;
-  margin-bottom: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px; /* Reduced from 20px */
+  margin-bottom: 15px; /* Reduced from 25px */
+  padding: 10px; /* Reduced from 15px */
+  background: #f8f9fa;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.ticket-details:hover {
+  background: #f1f3f5;
 }
 
 .ticket-details p {
   margin: 0;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   color: #34495e;
+  font-size: 0.95rem;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .ticket-details span {
   font-weight: 600;
   color: #7f8c8d;
-  margin-right: 8px;
-  min-width: 120px;
+  margin-right: 12px;
+  min-width: 110px; /* Reduced from 130px */
+  position: relative;
+}
+
+.ticket-details span::after {
+  content: ":";
+  position: absolute;
+  right: 5px;
+}
+
+.ticket-details span:first-child {
+  font-weight: 500;
+  color: #95a5a6;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 0.8rem;
+}
+
+.ticket-details span:last-child {
+  font-weight: 600;
+  color: #2c3e50;
+  font-size: 1rem;
+}
+
+/* Special styling for price */
+.ticket-details p:has(span:contains("Price")) span:last-child {
+  color: #27ae60;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+/* Special styling for status */
+.ticket-details p:has(span:contains("Status")) span:last-child {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  background-color: #f1f3f5;
+}
+
+.ticket-details
+  p:has(span:contains("Status"))
+  span:last-child[data-status="Available"] {
+  color: #2ecc71;
+  background-color: rgba(46, 204, 113, 0.1);
+}
+
+.ticket-details
+  p:has(span:contains("Status"))
+  span:last-child[data-status="Paid"] {
+  color: #e74c3c;
+  background-color: rgba(231, 76, 60, 0.1);
+}
+
+/* Special styling for ticket number */
+.ticket-details p:has(span:contains("Ticket Number")) span:last-child {
+  font-family: "Monaco", "Consolas", monospace;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+  color: #3498db;
+}
+
+/* Special styling for purchase date */
+.ticket-details p:has(span:contains("Purchase Date")) span:last-child {
+  font-family: "Inter", sans-serif;
+  color: #8e44ad;
+  font-size: 0.9rem;
 }
 
 .buy-button {
   background: linear-gradient(135deg, #3498db, #2980b9);
   color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 8px 20px; /* Reduced from 12px 25px */
   border-radius: 25px;
   cursor: pointer;
   font-weight: 600;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   text-transform: uppercase;
-  letter-spacing: 1px;
-  font-size: 0.9rem;
+  letter-spacing: 1.2px;
+  font-size: 0.85rem; /* Reduced from 0.95rem */
+  position: relative;
+  overflow: hidden;
+}
+
+.buy-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: all 0.5s;
+}
+
+.buy-button:hover::before {
+  left: 100%;
 }
 
 .buy-button:hover:not(.disabled) {
-  background: linear-gradient(135deg, #2980b9, #3498db);
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+  background: linear-gradient(135deg, #2980b9, #2ecc71);
+  transform: translateY(-3px);
+  box-shadow: 0 7px 20px rgba(52, 152, 219, 0.4);
 }
 
 .buy-button.disabled {
   background: linear-gradient(135deg, #bdc3c7, #95a5a6);
   cursor: not-allowed;
-  opacity: 0.7;
+  opacity: 0.8;
+}
+
+/* Status badge styling */
+.status-badge {
+  padding: 4px 10px; /* Reduced from 6px 12px */
+  border-radius: 20px;
+  font-size: 0.8rem; /* Reduced from 0.9rem */
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.status-badge[data-status="Available"] {
+  background-color: #2ecc71;
+  color: white;
+  box-shadow: 0 2px 5px rgba(46, 204, 113, 0.3);
+}
+
+.status-badge[data-status="Paid"] {
+  background-color: #e74c3c;
+  color: white;
+  box-shadow: 0 2px 5px rgba(231, 76, 60, 0.3);
+}
+
+.price-value {
+  color: #27ae60;
+  font-weight: 700;
+  font-size: 1.2rem;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+/* Loading and error states */
+.loading {
+  text-align: center;
+  padding: 30px; /* Reduced from 40px */
+  color: #3498db;
+  font-size: 1.1rem; /* Reduced from 1.2rem */
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.6;
+  }
 }
 
 .error-message {
   color: #e74c3c;
   background: #fceae9;
-  padding: 15px;
-  border-radius: 5px;
+  padding: 15px; /* Reduced from 20px */
+  border-radius: 8px;
   border-left: 5px solid #e74c3c;
   margin: 20px 0;
+  font-weight: 500;
+  box-shadow: 0 2px 5px rgba(231, 76, 60, 0.1);
 }
 
 .no-tickets {
   color: #7f8c8d;
   text-align: center;
-  padding: 40px;
+  padding: 30px; /* Reduced from 50px */
   background: #f8f9fa;
-  border-radius: 5px;
-  font-size: 1.2rem;
+  border-radius: 8px;
+  font-size: 1.1rem; /* Reduced from 1.3rem */
+  border: 2px dashed #bdc3c7;
 }
 
-/* Status badge styling */
-.ticket-details p span:contains("Status:") + span {
-  padding: 4px 8px;
-  border-radius: 12px;
+.sidebar {
+  flex: 1;
+  max-width: 300px;
+  background: white;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.05);
+  height: fit-content;
+  position: sticky;
+  top: 20px;
+}
+
+.sidebar-title {
+  color: #2c3e50;
+  font-size: 1.5em;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 10px;
+}
+
+.stats-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.stat-item {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.stat-item:hover {
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.stat-label {
+  color: #7f8c8d;
   font-size: 0.9rem;
-  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 5px;
 }
 
-.ticket-details p span[data-status="Available"] {
-  background-color: #2ecc71;
-  color: white;
-}
-
-.ticket-details p span[data-status="Paid"] {
-  background-color: #e74c3c;
-  color: white;
-}
-
-/* Price styling */
-.ticket-details p span:contains("Price:") + span {
-  color: #27ae60;
-  font-weight: 700;
-  font-size: 1.1rem;
+.stat-value {
+  color: #2c3e50;
+  font-size: 1.2rem;
+  font-weight: 600;
 }
 
 /* Responsive design */
 @media (max-width: 768px) {
   .tickets-container {
     padding: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 15px;
+  }
+
+  .tickets-container h1 {
+    font-size: 2.2em;
   }
 
   .ticket-details {
@@ -146,5 +398,11 @@
 
   .ticket-item:hover {
     transform: none;
+  }
+}
+
+@media (max-width: 1024px) {
+  .sidebar {
+    display: none;
   }
 }
