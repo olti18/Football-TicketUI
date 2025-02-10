@@ -379,6 +379,21 @@
   font-weight: 600;
 }
 
+.qr-code {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+  padding: 10px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.qr-code img {
+  max-width: 150px;
+  height: auto;
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
   .tickets-container {

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import styled from "styled-components";
 import Tickets from "./pages/Tickets";
+import MyTickets from "./pages/MyTickets"; // Add this import
 import AuthForm from "./pages/AuthForm";
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
@@ -29,7 +30,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/tickets" element={isAuthenticated ? <Tickets /> : <Container><AuthForm onLogin={handleLogin} /></Container>} />
-          <Route path="/my-tickets" element={isAuthenticated ? <Tickets /> : <Container><AuthForm onLogin={handleLogin} /></Container>} />
+          <Route path="/my-tickets" element={isAuthenticated ? <MyTickets /> : <Container><AuthForm onLogin={handleLogin} /></Container>} />
           <Route path="/profile" element={isAuthenticated ? <Profile /> : <Container><AuthForm onLogin={handleLogin} /></Container>} />
         </Routes>
       </div>
