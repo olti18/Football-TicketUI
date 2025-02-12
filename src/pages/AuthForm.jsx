@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
-import FormWrapper from "../components/FormWrapper";
-import InputField from "../components/InputField";
-import Button from "../components/Button";
-import ToggleButton from "../components/ToggleButton";
+import "../styles/AuthForm.css";
 
 const AuthForm = ({ onLogin }) => {
   const [username, setUsername] = useState("");
@@ -49,19 +46,45 @@ const AuthForm = ({ onLogin }) => {
   };
 
   return (
-    <FormWrapper>
+    <div className="form-wrapper">
       <h1>{isLogin ? "User Login" : "User Registration"}</h1>
       <form onSubmit={isLogin ? handleLogin : handleRegister}>
-        <InputField type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
-        {!isLogin && <InputField type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />}
-        <InputField type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-        <Button type="submit">{isLogin ? "Login" : "Register"}</Button>
+        <input
+          className="input-field"
+          type="text"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        {!isLogin && (
+          <input
+            className="input-field"
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        )}
+        <input
+          className="input-field"
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <button className="button" type="submit">
+          {isLogin ? "Login" : "Register"}
+        </button>
       </form>
-      {message && <p style={{ color: isSuccess ? "green" : "red" }}>{message}</p>}
-      <ToggleButton onClick={() => setIsLogin(!isLogin)}>
+      {message && (
+        <p className={`message ${isSuccess ? "success" : "error"}`}>
+          {message}
+        </p>
+      )}
+      <button className="toggle-button" onClick={() => setIsLogin(!isLogin)}>
         {isLogin ? "Switch to Register" : "Switch to Login"}
-      </ToggleButton>
-    </FormWrapper>
+      </button>
+    </div>
   );
 };
 
