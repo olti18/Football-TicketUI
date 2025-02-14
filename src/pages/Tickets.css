@@ -7,7 +7,7 @@
 .tickets-container {
   padding: 30px;
   max-width: 800px; /* Reduced from 900px */
-  margin: 0;  /* Changed from margin: 0 auto */
+  margin: 0; /* Changed from margin: 0 auto */
   background: linear-gradient(to bottom, #f8f9fa, #ffffff);
   border-radius: 15px;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.05);
@@ -288,9 +288,9 @@
 /* Loading and error states */
 .loading {
   text-align: center;
-  padding: 30px; /* Reduced from 40px */
-  color: #3498db;
-  font-size: 1.1rem; /* Reduced from 1.2rem */
+  padding: 2rem;
+  font-size: 1.2rem;
+  color: #666;
   animation: pulse 1.5s infinite;
 }
 
@@ -307,10 +307,12 @@
 }
 
 .error-message {
-  color: #e74c3c;
-  background: #fceae9;
-  padding: 15px; /* Reduced from 20px */
+  text-align: center;
+  padding: 2rem;
+  color: #dc2626;
+  background: #fee2e2;
   border-radius: 8px;
+  margin: 1rem;
   border-left: 5px solid #e74c3c;
   margin: 20px 0;
   font-weight: 500;
@@ -392,6 +394,54 @@
 .qr-code img {
   max-width: 150px;
   height: auto;
+}
+
+.payment-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.payment-modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+  width: 90%;
+  animation: modalSlideIn 0.3s ease-out;
+}
+
+.payment-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Responsive design */
