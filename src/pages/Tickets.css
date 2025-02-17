@@ -1,16 +1,20 @@
 .page-container {
-  display: flex;
-  gap: 30px;
-  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 2rem;
+  max-width: 1400px;
+  margin: 2rem auto;
+  padding: 0 2rem;
 }
 
 .tickets-container {
-  padding: 30px;
+  padding: 2rem;
   max-width: 800px; /* Reduced from 900px */
   margin: 0; /* Changed from margin: 0 auto */
-  background: linear-gradient(to bottom, #f8f9fa, #ffffff);
-  border-radius: 15px;
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.05);
+  background: rgba(255, 255, 255, 0.98);
+  border-radius: 24px;
+  box-shadow: 0 20px 40px rgba(30, 64, 175, 0.08),
+    0 10px 20px rgba(30, 64, 175, 0.05);
   flex: 2;
 }
 
@@ -20,9 +24,12 @@
 }
 
 .tickets-container h1 {
-  color: #2c3e50;
-  font-size: 2.2em; /* Reduced from 2.8em */
-  margin-bottom: 30px; /* Reduced from 40px */
+  color: #1e40af;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  text-align: center;
+  letter-spacing: -0.5px;
   border-bottom: 3px solid #3498db;
   padding-bottom: 10px; /* Reduced from 15px */
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
@@ -40,17 +47,20 @@
 }
 
 .tickets-list {
-  display: flex;
-  flex-direction: column;
-  gap: 15px; /* Reduced from 25px */
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
 }
 
 .ticket-item {
   background: white;
-  border-left: 4px solid #3498db; /* Reduced from 5px */
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(30, 64, 175, 0.1);
+  box-shadow: 0 4px 6px -1px rgba(30, 64, 175, 0.05),
+    0 2px 4px -1px rgba(30, 64, 175, 0.03);
   padding: 15px 20px; /* Reduced from 25px */
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
 }
@@ -67,22 +77,47 @@
 }
 
 .ticket-item:hover {
-  transform: translateX(10px) translateY(-2px);
-  box-shadow: 0 8px 20px rgba(52, 152, 219, 0.2);
+  transform: translateY(-5px);
+  box-shadow: 0 20px 25px -5px rgba(30, 64, 175, 0.1),
+    0 10px 10px -5px rgba(30, 64, 175, 0.04);
 }
 
 .ticket-item:hover::before {
   transform: scaleY(1.1);
 }
 
+.ticket-header {
+  background: linear-gradient(135deg, #1e40af, #3b82f6);
+  color: white;
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.ticket-header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    45deg,
+    transparent 25%,
+    rgba(255, 255, 255, 0.1) 35%,
+    rgba(255, 255, 255, 0.15) 40%,
+    transparent 50%
+  );
+  transform: translateX(-100%);
+  animation: shimmer 4s infinite;
+}
+
 .ticket-header h3 {
-  color: #2c3e50;
-  font-size: 1.3rem; /* Reduced from 1.6rem */
-  margin: 0 0 12px 0; /* Reduced from 0 0 20px 0 */
-  display: flex;
-  align-items: center;
+  font-size: 1.25rem;
   font-weight: 600;
-  letter-spacing: 0.5px;
+  margin: 0;
+  position: relative;
+  z-index: 1;
 }
 
 .ticket-header h3::before {
@@ -103,12 +138,13 @@
 }
 
 .ticket-details {
+  padding: 1.5rem;
+  background: linear-gradient(to bottom, white, rgba(241, 245, 249, 0.5));
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 12px; /* Reduced from 20px */
   margin-bottom: 15px; /* Reduced from 25px */
   padding: 10px; /* Reduced from 15px */
-  background: #f8f9fa;
   border-radius: 8px;
   transition: all 0.3s ease;
 }
@@ -118,12 +154,17 @@
 }
 
 .ticket-details p {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.75rem 0;
+  color: #475569;
+  font-size: 0.95rem;
   margin: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
   color: #34495e;
-  font-size: 0.95rem;
   padding: 8px 12px;
   border-radius: 6px;
   transition: all 0.2s ease;
@@ -131,6 +172,8 @@
 }
 
 .ticket-details span {
+  color: #1e40af;
+  font-weight: 500;
   font-weight: 600;
   color: #7f8c8d;
   margin-right: 12px;
@@ -206,17 +249,18 @@
 }
 
 .buy-button {
-  background: linear-gradient(135deg, #3498db, #2980b9);
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(135deg, #1e40af, #3b82f6);
   color: white;
   border: none;
-  padding: 8px 20px; /* Reduced from 12px 25px */
-  border-radius: 25px;
-  cursor: pointer;
   font-weight: 600;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  border-radius: 25px;
   text-transform: uppercase;
   letter-spacing: 1.2px;
-  font-size: 0.85rem; /* Reduced from 0.95rem */
   position: relative;
   overflow: hidden;
 }
@@ -241,16 +285,14 @@
   left: 100%;
 }
 
-.buy-button:hover:not(.disabled) {
-  background: linear-gradient(135deg, #2980b9, #2ecc71);
-  transform: translateY(-3px);
-  box-shadow: 0 7px 20px rgba(52, 152, 219, 0.4);
+.buy-button:not(.disabled):hover {
+  background: linear-gradient(135deg, #1e40af, #60a5fa);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
 }
 
 .buy-button.disabled {
-  background: linear-gradient(135deg, #bdc3c7, #95a5a6);
+  background: #cbd5e1;
   cursor: not-allowed;
-  opacity: 0.8;
 }
 
 /* Status badge styling */
@@ -288,9 +330,9 @@
 /* Loading and error states */
 .loading {
   text-align: center;
-  padding: 2rem;
+  padding: 3rem;
+  color: #1e40af;
   font-size: 1.2rem;
-  color: #666;
   animation: pulse 1.5s infinite;
 }
 
@@ -309,12 +351,11 @@
 .error-message {
   text-align: center;
   padding: 2rem;
-  color: #dc2626;
+  color: #991b1b;
   background: #fee2e2;
-  border-radius: 8px;
-  margin: 1rem;
+  border-radius: 12px;
+  margin: 2rem;
   border-left: 5px solid #e74c3c;
-  margin: 20px 0;
   font-weight: 500;
   box-shadow: 0 2px 5px rgba(231, 76, 60, 0.1);
 }
@@ -333,18 +374,20 @@
   flex: 1;
   max-width: 300px;
   background: white;
-  border-radius: 15px;
-  padding: 20px;
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.05);
+  border-radius: 20px;
+  padding: 1.5rem;
+  box-shadow: 0 10px 25px -5px rgba(30, 64, 175, 0.08),
+    0 8px 10px -6px rgba(30, 64, 175, 0.05);
   height: fit-content;
   position: sticky;
   top: 20px;
 }
 
 .sidebar-title {
-  color: #2c3e50;
-  font-size: 1.5em;
-  margin-bottom: 20px;
+  color: #1e40af;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
   border-bottom: 2px solid #3498db;
   padding-bottom: 10px;
 }
@@ -352,32 +395,30 @@
 .stats-container {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 1rem;
 }
 
 .stat-item {
-  background: #f8f9fa;
-  padding: 15px;
-  border-radius: 8px;
+  padding: 1rem;
+  background: rgba(241, 245, 249, 0.6);
+  border-radius: 12px;
   transition: all 0.3s ease;
 }
 
 .stat-item:hover {
-  background: #fff;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background: rgba(241, 245, 249, 0.9);
+  transform: translateY(-2px);
 }
 
 .stat-label {
-  color: #7f8c8d;
+  color: #64748b;
   font-size: 0.9rem;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-bottom: 5px;
+  margin-bottom: 0.5rem;
 }
 
 .stat-value {
-  color: #2c3e50;
-  font-size: 1.2rem;
+  color: #1e40af;
+  font-size: 1.5rem;
   font-weight: 600;
 }
 
@@ -444,6 +485,12 @@
   }
 }
 
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
   .tickets-container {
@@ -467,7 +514,35 @@
 }
 
 @media (max-width: 1024px) {
+  .page-container {
+    grid-template-columns: 1fr;
+  }
+
   .sidebar {
     display: none;
+    margin-top: 2rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .page-container {
+    padding: 1rem;
+    margin: 1rem;
+  }
+
+  .tickets-container {
+    padding: 1rem;
+  }
+
+  .tickets-list {
+    grid-template-columns: 1fr;
+  }
+
+  .ticket-header {
+    padding: 1.25rem;
+  }
+
+  .ticket-details {
+    padding: 1.25rem;
   }
 }
