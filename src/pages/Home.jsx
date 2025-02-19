@@ -26,17 +26,28 @@ const Home = () => {
 
   return (
     <div className="home-container">
-      <section className="hero-section">
-        <div className="hero-overlay"></div>
-        <div className="hero-content animate">
-          <h1>Experience the Beautiful Game</h1>
-          <p>Get premium tickets for the world's biggest football matches</p>
-          <div className="hero-buttons">
-            <Link to="/tickets" className="cta-button primary">Browse Tickets</Link>
-            <Link to="/matches" className="cta-button secondary">View Matches</Link>
+      <div className="hero-section">
+        <div className="hero-content">
+          <h1 className="hero-title">
+            Experience the <span className="highlight">Thrill</span> of Live Football
+          </h1>
+          <p className="hero-subtitle">
+            Get your tickets now and be part of the action
+          </p>
+          <Link to="/tickets" className="cta-button">
+            Browse Tickets
+            <span className="button-arrow">→</span>
+          </Link>
+        </div>
+        <div className="hero-graphics">
+          <div className="stadium-graphic"></div>
+          <div className="floating-tickets">
+            <div className="ticket-card ticket-1"></div>
+            <div className="ticket-card ticket-2"></div>
+            <div className="ticket-card ticket-3"></div>
           </div>
         </div>
-      </section>
+      </div>
 
       <section className="stats-section animate">
         <div className="stat-container">
@@ -55,60 +66,45 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="features-section">
-        <h2 className="section-title animate">Why Choose Us</h2>
-        <div className="features-grid">
-          {[
-            { icon: '🎫', title: 'Secure Tickets', desc: 'Digital QR codes for instant access' },
-            { icon: '⚡', title: 'Instant Delivery', desc: 'Get your tickets immediately' },
-            { icon: '💰', title: 'Best Prices', desc: 'Competitive pricing guaranteed' },
-            { icon: '🔒', title: 'Safe & Secure', desc: 'Protected transactions' }
-          ].map((feature, index) => (
-            <div key={index} className="feature-card animate">
-              <span className="feature-icon">{feature.icon}</span>
-              <h3>{feature.title}</h3>
-              <p>{feature.desc}</p>
-            </div>
-          ))}
+      <div className="features-section">
+        <div className="feature-card">
+          <div className="feature-icon">🎟️</div>
+          <h3>Easy Booking</h3>
+          <p>Book your tickets in minutes with our simple process</p>
         </div>
-      </section>
+        <div className="feature-card">
+          <div className="feature-icon">🏟️</div>
+          <h3>Best Seats</h3>
+          <p>Choose from a wide selection of premium seats</p>
+        </div>
+        <div className="feature-card">
+          <div className="feature-icon">📱</div>
+          <h3>Mobile Tickets</h3>
+          <p>Get your tickets delivered instantly to your phone</p>
+        </div>
+      </div>
 
-      <section className="upcoming-matches">
-        <h2 className="section-title animate">Featured Matches</h2>
+      <div className="upcoming-matches">
+        <h2>Upcoming Matches</h2>
         <div className="matches-grid">
-          {[
-            {
-              image: "https://images.unsplash.com/photo-1577223608772-0a6c9fbcc7b3",
-              teams: "Liverpool vs Manchester United",
-              league: "Premier League",
-              date: "March 15, 2025",
-              price: "From $99"
-            },
-            {
-              image: "https://images.unsplash.com/photo-1577223608772-0a6c9fbcc7b3",
-              teams: "Real Madrid vs Barcelona",
-              league: "La Liga",
-              date: "March 20, 2025",
-              price: "From $120"
-            }
-          ].map((match, index) => (
-            <div key={index} className="match-card animate">
-              <div className="match-image-container">
-                <img src={match.image} alt={match.teams} className="match-image" />
-                <div className="match-overlay">
-                  <span className="match-price">{match.price}</span>
-                </div>
+          {[1, 2, 3].map((match) => (
+            <div key={match} className="match-card">
+              <div className="teams">
+                <span className="team">Team A</span>
+                <span className="vs">VS</span>
+                <span className="team">Team B</span>
               </div>
               <div className="match-info">
-                <h3>{match.teams}</h3>
-                <p className="match-league">{match.league}</p>
-                <p className="match-date">{match.date}</p>
-                <Link to="/tickets" className="match-button">View Tickets</Link>
+                <span className="date">Mar 15, 2024</span>
+                <span className="time">20:00</span>
               </div>
+              <Link to="/tickets" className="view-tickets">
+                View Tickets
+              </Link>
             </div>
           ))}
         </div>
-      </section>
+      </div>
 
       <section className="newsletter-section">
         <div className="newsletter-content animate">
