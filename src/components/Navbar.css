@@ -1,5 +1,4 @@
 .navbar {
-
   position: fixed;
   top: 0;
   left: 0;
@@ -63,7 +62,7 @@
 }
 
 .nav-link.active::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -4px;
   left: 0;
