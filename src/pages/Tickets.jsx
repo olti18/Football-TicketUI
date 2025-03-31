@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 import PaymentForm from "../components/PaymentForm";
+import { IoLocationOutline } from "react-icons/io5";
 import "./Tickets.css";
 
 const Tickets = () => {
@@ -74,33 +75,46 @@ const Tickets = () => {
           <div className="tickets-list">
             {tickets.map((ticket) => (
               <div key={ticket.id} className="ticket-item">
-                <div className="ticket-header">
-                  <h3>{ticket.matchName}</h3>
+                <div className="ticket-content">
+                  <div className="match-date">
+                    <span className="day">
+                      {new Date(ticket.date).getDate()}
+                    </span>
+                    <span className="month">
+                      {new Date(ticket.date).toLocaleString("default", {
+                        month: "short",
+                      })}
+                    </span>
+                  </div>
+
+                  <div className="match-info">
+                    <h3 className="match-name">{ticket.matchName}</h3>
+                    <div className="venue">
+                      <IoLocationOutline />
+                      {ticket.venue}
+                    </div>
+                  </div>
                 </div>
+
                 <div className="ticket-details">
-                  <p>
-                    <span>Ticket Number:</span> {ticket.seatNumber}
-                  </p>
-                  <p>
-                    <span>Price:</span> ${ticket.price}
-                  </p>
-                  <p>
-                    <span>Status:</span> {ticket.paid ? "Sold" : "Available"}
-                  </p>
-                  {ticket.purchaseDate && (
-                    <p>
-                      <span>Purchase Date:</span>{" "}
-                      {new Date(ticket.purchaseDate).toLocaleDateString()}
-                    </p>
-                  )}
+                  <div className="price-info">
+                    <span className="price">${ticket.price}</span>
+                    <span
+                      className="status-badge"
+                      data-status={ticket.paid ? "Paid" : "Available"}
+                    >
+                      {ticket.paid ? "Sold" : "Available"}
+                    </span>
+                  </div>
+
+                  <button
+                    className={`buy-button ${ticket.paid ? "disabled" : ""}`}
+                    disabled={ticket.paid}
+                    onClick={() => !ticket.paid && setSelectedTicket(ticket.id)}
+                  >
+                    {ticket.paid ? "Sold Out" : "Buy Now"}
+                  </button>
                 </div>
-                <button
-                  className={`buy-button ${ticket.paid ? "disabled" : ""}`}
-                  disabled={ticket.paid}
-                  onClick={() => !ticket.paid && setSelectedTicket(ticket.id)}
-                >
-                  {ticket.paid ? "Sold" : "Purchase Ticket"}
-                </button>
               </div>
             ))}
           </div>
@@ -109,29 +123,6 @@ const Tickets = () => {
         )}
       </div>
 
-      <div className="sidebar">
-        <h2 className="sidebar-title">Ticket Statistics</h2>
-        <div className="stats-container">
-          <div className="stat-item">
-            <div className="stat-label">Available Tickets</div>
-            <div className="stat-value">
-              {tickets.filter((t) => !t.paid).length}
-            </div>
-          </div>
-          <div className="stat-item">
-            <div className="stat-label">Sold Tickets</div>
-            <div className="stat-value">
-              {tickets.filter((t) => t.paid).length}
-            </div>
-          </div>
-          <div className="stat-item">
-            <div className="stat-label">Total Value</div>
-            <div className="stat-value">
-              ${tickets.reduce((sum, t) => sum + Number(t.price), 0).toFixed(2)}
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   );
 };
